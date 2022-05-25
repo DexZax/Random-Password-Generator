@@ -1,8 +1,8 @@
 // Assignment code here
-var lowercase = "abcdefghijklmnopqrstuvwxyz";
-var uppercase = "ABDCEFGHIJKLMNOPQRSTUVWXYZ";
-var number = "0123456789";
-var special = "!@#$%&*-/<>+_[]~";
+var uppercase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var lowercase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",  "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var special = ["@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]"];
 
 var passwordText = document.querySelector("#password");
 
@@ -12,7 +12,7 @@ function generatePassword() {
   var passwordLength = window.prompt("how many characters would you like in your password? please note, you must have more than 8 and less than 128.");
   if (passwordLength < 8 || passwordLength > 128) {
     window.alert("Password must have more than 8 characters and less than 128. Please choose a different number.");
-    generatePassword();
+    return generatePassword();
   }
   
   var lowercaseCharacters = window.confirm("Would you like to include lowercase characters in your password?");
@@ -20,30 +20,29 @@ function generatePassword() {
   var numberCharacters = window.confirm("Would you like your password to have numbers in it?");
   var specialCharacters = window.confirm("Would you like to include special characters in your password?");
 
-  var characterSet = "";
-  var generation = "";
+  var characterSet = [];
+  var generation = [];
 
   if (!lowercaseCharacters && !uppercaseCharacters && !numberCharacters && !specialCharacters) {
     window.alert("you must select atleat one character type.");
-    generatePassword();
+    return generatePassword();
   }
   if (lowercaseCharacters) {
-    characterSet = characterSet.concat(lowercase);
+    generation = generation.concat(lowercase);
   }
   if (uppercaseCharacters) {
-    characterSet = characterSet.concat(uppercase);
+    generation = generation.concat(uppercase);
   }
   if (numberCharacters) {
-    characterSet = characterSet.concat(number);
+    generation = generation.concat(number);
   }
   if (specialCharacters) {
-    characterSet = characterSet.concat(special);
+    generation = generation.concat(special);
   }
   for (var i = 0; i < passwordLength; i++) {
-    generation += characterSet[Math.floor(math.random() * passwordLength)];
+    characterSet.push(generation[Math.floor(Math.random() * generation.length)]);
   }
-  return generation;
-
+  return characterSet.join('');
 }
 
 
